@@ -3,6 +3,11 @@
 
 This is one of the exicting project so far in term-1. Car is able to drive autonomously with no manual intervention just using deep learning with no lidar or GPS information. Implementation is based on Nvidia's paper(https://arxiv.org/abs/1604.07316)
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/rZX8sDl54V8/0.jpg)](https://www.youtube.com/watch?v=rZX8sDl54V8)
+
+Front camera view video<br/>
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/CS9U0x3s1JY/0.jpg)](https://www.youtube.com/watch?v=CS9U0x3s1JY)
+
 The goals / steps of this project are the following:
 * Use the simulator to collect data of good driving behavior
 * Build, a convolution neural network in Keras that predicts steering angles from images
@@ -19,65 +24,41 @@ My project includes the following files:
 
 Model architecture is inspired by Nviida's End to End Learning for Self-Driving Cars paper with few modifications. Below is detailed description of model:
 
-Layer (type)                 Output Shape              Param #   
-=================================================================
-lambda_1 (Lambda)            (None, 160, 320, 3)       0         
-_________________________________________________________________
-cropping2d_1 (Cropping2D)    (None, 70, 320, 3)        0         
-_________________________________________________________________
-conv2d_1 (Conv2D)            (None, 70, 320, 3)        12        
-_________________________________________________________________
-activation_1 (Activation)    (None, 70, 320, 3)        0         
-_________________________________________________________________
-conv2d_2 (Conv2D)            (None, 33, 158, 24)       1824      
-_________________________________________________________________
-activation_2 (Activation)    (None, 33, 158, 24)       0         
-_________________________________________________________________
-conv2d_3 (Conv2D)            (None, 15, 77, 36)        21636     
-_________________________________________________________________
-activation_3 (Activation)    (None, 15, 77, 36)        0         
-_________________________________________________________________
-conv2d_4 (Conv2D)            (None, 6, 37, 48)         43248     
-_________________________________________________________________
-activation_4 (Activation)    (None, 6, 37, 48)         0         
-_________________________________________________________________
-conv2d_5 (Conv2D)            (None, 4, 35, 64)         27712     
-_________________________________________________________________
-batch_normalization_1 (Batch (None, 4, 35, 64)         256       
-_________________________________________________________________
-activation_5 (Activation)    (None, 4, 35, 64)         0         
-_________________________________________________________________
-dropout_1 (Dropout)          (None, 4, 35, 64)         0         
-_________________________________________________________________
-conv2d_6 (Conv2D)            (None, 2, 33, 64)         36928     
-_________________________________________________________________
-activation_6 (Activation)    (None, 2, 33, 64)         0         
-_________________________________________________________________
-dropout_2 (Dropout)          (None, 2, 33, 64)         0         
-_________________________________________________________________
-flatten_1 (Flatten)          (None, 4224)              0         
-_________________________________________________________________
-dense_1 (Dense)              (None, 1164)              4917900   
-_________________________________________________________________
-batch_normalization_2 (Batch (None, 1164)              4656      
-_________________________________________________________________
-dropout_3 (Dropout)          (None, 1164)              0         
-_________________________________________________________________
-dense_2 (Dense)              (None, 100)               116500    
-_________________________________________________________________
-batch_normalization_3 (Batch (None, 100)               400       
-_________________________________________________________________
-dense_3 (Dense)              (None, 50)                5050      
-_________________________________________________________________
-dropout_4 (Dropout)          (None, 50)                0         
-_________________________________________________________________
-dense_4 (Dense)              (None, 10)                510       
-_________________________________________________________________
-dense_5 (Dense)              (None, 1)                 11        
-=================================================================
-Total params: 5,176,643
-Trainable params: 5,173,987
-Non-trainable params: 2,656
+| Layer (type)           |     Output Shape     |         Param    |
+-------------------------|----------------------|-------------------|
+|lambda_1 (Lambda)        |    (None, 160, 320, 3)    |  0        |
+|cropping2d_1 (Cropping2D) |  (None, 70, 320, 3)     |   0         |
+|conv2d_1 (Conv2D)          |  (None, 70, 320, 3)   |     12      |  
+|activation_1 (Activation) |   (None, 70, 320, 3)   |     0       |  
+|conv2d_2 (Conv2D)        |    (None, 33, 158, 24)  |     1824    | 
+|activation_2 (Activation)  |  (None, 33, 158, 24)    |   0     |    
+|conv2d_3 (Conv2D)        |    (None, 15, 77, 36)    |    21636    |
+|activation_3 (Activation) |  (None, 15, 77, 36)    |    0       | 
+|conv2d_4 (Conv2D)         |   (None, 6, 37, 48)    |     43248   |  
+|activation_4 (Activation) |   (None, 6, 37, 48)    |     0       |  
+|conv2d_5 (Conv2D)         |  (None, 4, 35, 64)     |    27712    | 
+|batch_normalization_1 (Batch| (None, 4, 35, 64)    |     256     |  
+|activation_5 (Activation)   | (None, 4, 35, 64)    |    0        | 
+|dropout_1 (Dropout)       |   (None, 4, 35, 64)    |     0       |  
+|conv2d_6 (Conv2D)         |   (None, 2, 33, 64)    |     36928   |  
+|activation_6 (Activation) |   (None, 2, 33, 64)    |    0        | 
+|dropout_2 (Dropout)       |   (None, 2, 33, 64)    |     0       |  
+|flatten_1 (Flatten)       |   (None, 4224)         |     0       |  
+|dense_1 (Dense)           |   (None, 1164)         |     4917900 |  
+|batch_normalization_2 (Batch |(None, 1164)         |     4656     | 
+|dropout_3 (Dropout)        |  (None, 1164)         |     0        | 
+|dense_2 (Dense)          |   (None, 100)           |    116500    |
+|batch_normalization_3 (Batch| (None, 100)          |     400     |  
+|dense_3 (Dense)           |   (None, 50)           |     5050    |  
+|dropout_4 (Dropout)       |   (None, 50)           |     0       |  
+|dense_4 (Dense)           |   (None, 10)           |     510     |  
+|dense_5 (Dense)           |   (None, 1)            |     11      |  
+
+
+|Total params| 5,176,643|
+------|--|
+|Trainable params| 5,173,987|
+|Non-trainable params| 2,656|
 
 Data from inputs images is normalized in model itself so that no preprocessing is required for test data. Top 70 pixels and bottom 20 pixels are cropped to remove background data not suitable for training. Dropout and batch normalization is used to avoid over fitting.
 
@@ -100,5 +81,5 @@ With just training on track-1 car is able to complete Jungle track lap with just
 Future improvements:
 
 1. Capture more data on track2 which has high elevations and sharp turns.
-2. Add data augumentation.
+2. Add data augmentation.
 3. Try Removing 3,1,1, convolutional layer and convert input image from RGB-YUV. 
