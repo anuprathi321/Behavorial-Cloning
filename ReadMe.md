@@ -1,7 +1,7 @@
 
 **Behavioral Cloning Project**
 
-This is one of the exicting project so far in term-1. Car is able to drive autonomously with no manual intervention just using deep learning with no lidar or GPS information. Implementation is based on Nvidia's paper(https://arxiv.org/abs/1604.07316)
+This is one of the exicting project so far in term-1. Car is able to drive autonomously with no manual intervention just using deep learning with no lidar or GPS information. Implementation is based on Nvidia's End to End Learning for Self-Driving Car's paper(https://arxiv.org/abs/1604.07316)
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/rZX8sDl54V8/0.jpg)](https://www.youtube.com/watch?v=rZX8sDl54V8)
 
@@ -22,7 +22,7 @@ My project includes the following files:
 * ReadMe.md summarizing the results
 
 
-Model architecture is inspired by Nviida's End to End Learning for Self-Driving Cars paper with few modifications. Below is detailed description of model:
+Model architecture is inspired by Nvidia's End to End Learning for Self-Driving Car's paper with few modifications. Below is detailed description of model:
 
 | Layer (type)           |     Output Shape     |         Param    |
 -------------------------|----------------------|-------------------|
@@ -60,7 +60,7 @@ Model architecture is inspired by Nviida's End to End Learning for Self-Driving 
 |Trainable params| 5,173,987|
 |Non-trainable params| 2,656|
 
-Data from inputs images is normalized in model itself so that no preprocessing is required for test data. Top 70 pixels and bottom 20 pixels are cropped to remove background data not suitable for training. Dropout and batch normalization is used to avoid over fitting.
+Data from input images is normalized in model itself so that no preprocessing is required for test data. Top 70 pixels and bottom 20 pixels are cropped to remove background data that is not suitable for training. Dropout and batch normalization is used to avoid over fitting of the model.
 
 The model used an adam optimizer, so the learning rate was not tuned manually.
 
@@ -70,13 +70,13 @@ To recover from edge to center of road, additional training data was captured wh
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 15 as validation accuracy started decreasing thereafter. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs were 15 as validation accuracy started decreasing thereafter. I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
 To avoid turning at high speed, throttle was decreased for sharp left turns.
 
-Generators for training and validation data was used in order to avoid loading whole dataset in memory. Model was trained on Nvidia's GTx1080 card.
+Generators for training and validation data was used in order to avoid loading whole dataset in memory. Model was trained on Nvidia's GTX1080 card.
 
-With just training on track-1 car is able to complete Jungle track lap with just 3 manual interventions. Since track2 has more elevations and sharp turns more data needs to be captured.
+With just training on track-1, car is able to complete Jungle track lap with just 3 manual interventions. Since track2 has more elevations and sharp turns more data needs to be captured.
 
 Future improvements:
 
